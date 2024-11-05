@@ -5,6 +5,8 @@
 //  Created by Vladimir on 03/09/24.
 //  Copyright © 2024 Angela Yu. All rights reserved.
 
+import CoreGraphics
+
 struct K {
     static let appName = "⚡️FlashChat"
     static let cellIdentifier = "ReusableCell"
@@ -17,6 +19,9 @@ struct K {
         static let lightPurple = "BrandLightPurple"
         static let blue = "BrandBlue"
         static let lighBlue = "BrandLightBlue"
+    }
+    struct Size {
+        static let buttonSize: CGFloat = 48
     }
     
     struct FStore {
