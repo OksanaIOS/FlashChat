@@ -20,23 +20,14 @@ class WelcomeViewController: UIViewController {
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
-    private lazy var registerButton: UIButton  = {
-        let element = UIButton()
-        element.titleLabel?.font = .systemFont(ofSize: 30)
-        element.setTitleColor(UIColor(named: K.BrandColors.blue), for: .normal)
-        element.backgroundColor = UIColor(named: K.BrandColors.lighBlue)
-        element.translatesAutoresizingMaskIntoConstraints = false
-        return element
-    }()
+ 
+    let registerButton = UIButton(
+        titleColor: UIColor(named: K.BrandColors.blue),
+        backgroundColor: UIColor(named: K.BrandColors.lighBlue)
+        )
+    let logInButton = UIButton(titleColor: .white, backgroundColor: .systemTeal)
+    
 
-    private lazy var logInButton: UIButton  = {
-        let element = UIButton()
-        element.titleLabel?.font = .systemFont(ofSize: 30)
-        element.setTitleColor(UIColor(named: K.BrandColors.blue), for: .normal)
-        element.backgroundColor = UIColor(named: K.BrandColors.lighBlue)
-        element.translatesAutoresizingMaskIntoConstraints = false
-        return element
-    }()
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +39,19 @@ class WelcomeViewController: UIViewController {
     
     //MARK: - Set Views
     private func setViews() {
+        view.backgroundColor = .white
         view.addSubview(titleLabel)
         view.addSubview(registerButton)
         view.addSubview(logInButton)
-        registerButton.setTitle(K.registerSegue, for: .normal)
-        logInButton.setTitle(K.loginSegue, for: .normal)
+        registerButton.setTitle(K.registerName, for: .normal)
+        logInButton.setTitle(K.loginName, for: .normal)
+        
+        registerButton.addTarget(self, action: #selector(buttonsTapped), for: .touchUpInside)
+        logInButton.addTarget(self, action: #selector(buttonsTapped), for: .touchUpInside)
+    }
+    @objc private func buttonsTapped() {
+        let nextVC = RegisterViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
@@ -79,6 +78,18 @@ extension WelcomeViewController {
     }
     
 }
+extension UIButton {
+    convenience init(titleColor: UIColor?, backgroundColor: UIColor? = .clear) {
+        self.init(type: .system)
+        self.titleLabel?.font = .systemFont(ofSize: 30)
+        self.setTitleColor(titleColor, for: .normal)
+        self.backgroundColor = backgroundColor
+        self.translatesAutoresizingMaskIntoConstraints = false
+      
+    }
+    
+}
+
 
 #Preview {
     WelcomeViewController()
